@@ -5,7 +5,7 @@ open class NSCatWindow: NSWindow {
     public init(childView: NSView) {
         super.init(
             contentRect: .zero,
-            styleMask: [.closable, .miniaturizable, .fullSizeContentView, .titled],
+            styleMask: [.closable, .miniaturizable, .resizable, .fullSizeContentView, .titled],
             backing: .buffered,
             defer: false
         )
