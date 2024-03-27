@@ -18,7 +18,7 @@ Provides NSWindow with cat ears and tail
 
 # Demo
 
-<img src="resources/file-4-0.png" width="300px" alt="demo" />
+<img src="screenshots/file-4-0.png" width="300px" alt="demo" />
 
 # Minimal Example
 
