@@ -125,7 +125,7 @@ final class NSCatView: NSView {
         path.line(to: CGPoint(x: rightInnerCenter.x + innerRadius * cos(phi3),
                               y: rightInnerCenter.y + innerRadius * sin(phi3)))
         path.close()
-        NSColor.gray.setFill()
+        NSColor.textBackgroundColor.setFill()
         path.fill()
     }
 
