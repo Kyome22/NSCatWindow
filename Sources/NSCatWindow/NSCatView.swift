@@ -4,6 +4,8 @@ final class NSCatView: NSView {
     private let earOffset: CGFloat = 24
     private let toolbarHeight: CGFloat = 24
     private let tailRadius: CGFloat = 8
+    private var mouseInside: Bool = false
+    private var windowButtons: [NSButton] = []
     private var titleLabel = NSTextField(labelWithString: "")
 
     required init?(coder: NSCoder) {
@@ -139,6 +141,28 @@ final class NSCatView: NSView {
         path.fill()
     }
 
+    @objc func _mouseInGroup(_ button: NSButton) -> Bool {
+        return mouseInside
+    }
+
+    private func setNeedsDisplayToWindowButtons() {
+        windowButtons.forEach { button in
+            button.needsDisplay = true
+        }
+    }
+
+    override func mouseEntered(with event: NSEvent) {
+        super.mouseEntered(with: event)
+        mouseInside = true
+        setNeedsDisplayToWindowButtons()
+    }
+
+    override func mouseExited(with event: NSEvent) {
+        super.mouseExited(with: event)
+        mouseInside = false
+        setNeedsDisplayToWindowButtons()
+    }
+
     func setTitle(_ title: String) {
         titleLabel.stringValue = title
     }
@@ -151,5 +175,13 @@ final class NSCatView: NSView {
         button.leftAnchor.constraint(equalTo: leftAnchor, constant: button.frame.minX).isActive = true
         let offset = earOffset + 0.5 * toolbarHeight
         button.centerYAnchor.constraint(equalTo: topAnchor, constant: offset).isActive = true
+
+        let trackingArea = NSTrackingArea(
+            rect: button.bounds,
+            options: [.mouseEnteredAndExited, .activeAlways, .inVisibleRect],
+            owner: self
+        )
+        button.addTrackingArea(trackingArea)
+        windowButtons.append(button)
     }
 }
