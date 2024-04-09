@@ -16,6 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let hostingView = NSHostingView(rootView: SampleView())
         catWindow = NSCatWindow(childView: hostingView)
+        catWindow?.setTitle("Sample")
         catWindow?.center()
         catWindow?.orderFront(self)
     }

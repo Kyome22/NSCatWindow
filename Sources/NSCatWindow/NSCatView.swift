@@ -4,6 +4,7 @@ final class NSCatView: NSView {
     private let earOffset: CGFloat = 24
     private let toolbarHeight: CGFloat = 24
     private let tailRadius: CGFloat = 8
+    private var titleLabel = NSTextField(labelWithString: "")
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -11,13 +12,22 @@ final class NSCatView: NSView {
 
     init(childView: NSView) {
         super.init(frame: .zero)
+
         childView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(childView)
         childView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         childView.rightAnchor.constraint(equalTo: rightAnchor, constant: -2 * tailRadius).isActive = true
-        let offset = earOffset + toolbarHeight
+        var offset = earOffset + toolbarHeight
         childView.topAnchor.constraint(equalTo: topAnchor, constant: offset).isActive = true
         childView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(titleLabel)
+        titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -2 * tailRadius).isActive = true
+        offset = earOffset + 0.5 * toolbarHeight
+        titleLabel.centerYAnchor.constraint(equalTo: topAnchor, constant: offset).isActive = true
+        titleLabel.font = NSFont.systemFont(ofSize: 11, weight: .bold)
+        titleLabel.textColor = NSColor.secondaryLabelColor
     }
 
     override func draw(_ dirtyRect: NSRect) {
@@ -125,8 +135,12 @@ final class NSCatView: NSView {
         path.line(to: CGPoint(x: rightInnerCenter.x + innerRadius * cos(phi3),
                               y: rightInnerCenter.y + innerRadius * sin(phi3)))
         path.close()
-        NSColor.textBackgroundColor.setFill()
+        NSColor.tertiaryLabelColor.setFill()
         path.fill()
+    }
+
+    func setTitle(_ title: String) {
+        titleLabel.stringValue = title
     }
 
     func setWindowButton(_ button: NSButton?) {
