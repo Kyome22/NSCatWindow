@@ -24,10 +24,9 @@ Provides NSWindow with cat ears and tail
 
 ```swift
 let hostingView = NSHostingView(rootView: SomeSwiftUIView())
-hostingView.setFrameSize(hostingView.fittingSize)
 let catWindow = NSCatWindow(childView: hostingView)
 catWindow.setTitle("Sample")
-catWindow.makeKeyAndOrderFront(nil)
+catWindow.orderFront(nil)
 ```
 
 # Contributors
