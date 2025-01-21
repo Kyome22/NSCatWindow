@@ -18,10 +18,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         catWindow = NSCatWindow(childView: hostingView)
         catWindow?.setTitle("Sample")
         catWindow?.center()
-        catWindow?.orderFront(self)
+        catWindow?.orderFront(nil)
     }
-
-    func applicationWillTerminate(_ aNotification: Notification) {}
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool { true }
 
