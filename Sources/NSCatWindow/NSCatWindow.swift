@@ -2,7 +2,7 @@ import AppKit
 import SwiftUI
 
 open class NSCatWindow: NSWindow {
-    public init(title: String? = nil, childView: NSView? = nil) {
+    public init() {
         super.init(
             contentRect: .zero,
             styleMask: [.closable, .miniaturizable, .resizable, .fullSizeContentView, .titled],
@@ -14,9 +14,6 @@ open class NSCatWindow: NSWindow {
         backgroundColor = .clear
         isOpaque = false
         hasShadow = true
-        if let childView {
-            contentView = NSCatView(childView: childView)
-        }
     }
 
     public func setChildView(_ childView: NSView) {
